@@ -3,6 +3,7 @@ package org.example.event;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
@@ -13,7 +14,7 @@ import java.time.Instant;
         @JsonSubTypes.Type(value = SubmitLink.class, name = "SUBMIT_LINK"),
         @JsonSubTypes.Type(value = RejectLink.class, name = "REJECT_LINK"),
 })
-public sealed interface PaymentEvent permits AskForLink, SendLink, OpenLink, SubmitLink, RejectLink {
+public sealed interface PaymentEvent extends Serializable permits AskForLink, SendLink, OpenLink, SubmitLink, RejectLink {
 
     Instant timestamp();
 }
